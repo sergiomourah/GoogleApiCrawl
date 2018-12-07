@@ -1,0 +1,14 @@
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\bin\Debug\GoogleApiCrawl.exe.config
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\bin\Debug\GoogleApiCrawl.exe
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\bin\Debug\GoogleApiCrawl.pdb
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\bin\Debug\HtmlAgilityPack.dll
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\bin\Debug\HtmlAgilityPack.xml
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.csprojAssemblyReference.cache
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.FMain.resources
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.Properties.Resources.resources
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.csproj.GenerateResource.cache
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.csproj.CoreCompileInputs.cache
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.csproj.CopyComplete
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.exe
+C:\Users\sergi\source\repos\GoogleApiCrawl\GoogleApiCrawl\obj\Debug\GoogleApiCrawl.pdb
