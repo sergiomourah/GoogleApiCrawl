@@ -65,13 +65,16 @@ namespace GoogleApiCrawl
         /// <param name="button"></param>
         private void SelectButton(Button button)
         {
-            string numberPage = button.Text;
-            button.BackColor = Color.Gray;
-            btn_selecionado = button;
-            //Formula para definir o parametro de paginação do google
-            numberPage = ((int.Parse(numberPage) * 10) - 10).ToString();
-            GetResultsGoogle(numberPage);
-            SelectPage();
+            if (!string.IsNullOrEmpty(txtSearch.Text))
+            {
+                string numberPage = button.Text;
+                button.BackColor = Color.Gray;
+                btn_selecionado = button;
+                //Formula para definir o parametro de paginação do google
+                numberPage = ((int.Parse(numberPage) * 10) - 10).ToString();
+                GetResultsGoogle(numberPage);
+                SelectPage();
+            }
         }
 
         /// <summary>
@@ -137,40 +140,43 @@ namespace GoogleApiCrawl
         private void GetResultsGoogle(string numberPage)
         {
             this.flowLayoutPanel2.Controls.Clear();
-            WebClient webClient = new WebClient();
-            string url = "https://www.google.com/search?q=" + Regex.Replace(txtSearch.Text, " ", "+") + "&start=" + numberPage.Trim();
-            string page = webClient.DownloadString(url);
-            var htmlDocument = new HtmlAgilityPack.HtmlDocument();
-            htmlDocument.LoadHtml(page);
-
-            HtmlNodeCollection nodeList = htmlDocument.GetElementbyId("ires").ChildNodes;
-            //Verifica se consulta gerou resultados
-            if (nodeList.Count > 0)
+            if (!string.IsNullOrEmpty(txtSearch.Text))
             {
-                foreach (HtmlNode node in nodeList[0]?.ChildNodes)
+                WebClient webClient = new WebClient();
+                string url = "https://www.google.com/search?q=" + Regex.Replace(txtSearch.Text, " ", "+") + "&start=" + numberPage.Trim();
+                string page = webClient.DownloadString(url);
+                var htmlDocument = new HtmlAgilityPack.HtmlDocument();
+                htmlDocument.LoadHtml(page);
+
+                HtmlNodeCollection nodeList = htmlDocument.GetElementbyId("ires").ChildNodes;
+                //Verifica se consulta gerou resultados
+                if (nodeList.Count > 0)
                 {
-                    if (node.Attributes.Count > 0)
-                        if (node.Descendants().ToList().Exists(p => p.Attributes["class"] != null && p.Attributes["class"].Value.Equals("hJND5c")))
-                        {
-                            Resultados resultados = new Resultados();
-                            resultados.Link = node.Descendants().First(p => p.Attributes["class"] != null &&
-                                                                            p.Attributes["class"].Value.Equals("hJND5c")).InnerText;
-                            resultados.Description = node.Descendants().First(p => p.Attributes["class"] != null &&
-                                                                              p.Attributes["class"].Value.Equals("st")).InnerText;
-                            resultados.Title = node.Descendants().First(p => p.Attributes["class"] != null &&
-                                                                             p.Attributes["class"].Value.Equals("r")).InnerText.Replace("\n", "").Replace("  ", " ");
-                            if (node.Descendants().ToList().Exists(p => p.Attributes["class"] != null &&
-                                                                        p.Attributes["class"].Value.Equals("f")))
-                                resultados.TimePublished = node.Descendants().First(p => p.Attributes["class"] != null &&
-                                                                                         p.Attributes["class"].Value.Equals("f")).InnerText;
-                            //Criar Layouts dos Resultados
-                            CreatePanelResult(resultados);
-                        }
+                    foreach (HtmlNode node in nodeList[0]?.ChildNodes)
+                    {
+                        if (node.Attributes.Count > 0)
+                            if (node.Descendants().ToList().Exists(p => p.Attributes["class"] != null && p.Attributes["class"].Value.Equals("hJND5c")))
+                            {
+                                Resultados resultados = new Resultados();
+                                resultados.Link = node.Descendants().First(p => p.Attributes["class"] != null &&
+                                                                                p.Attributes["class"].Value.Equals("hJND5c")).InnerText;
+                                resultados.Description = node.Descendants().First(p => p.Attributes["class"] != null &&
+                                                                                  p.Attributes["class"].Value.Equals("st")).InnerText;
+                                resultados.Title = node.Descendants().First(p => p.Attributes["class"] != null &&
+                                                                                 p.Attributes["class"].Value.Equals("r")).InnerText.Replace("\n", "").Replace("  ", " ");
+                                if (node.Descendants().ToList().Exists(p => p.Attributes["class"] != null &&
+                                                                            p.Attributes["class"].Value.Equals("f")))
+                                    resultados.TimePublished = node.Descendants().First(p => p.Attributes["class"] != null &&
+                                                                                             p.Attributes["class"].Value.Equals("f")).InnerText;
+                                //Criar Layouts dos Resultados
+                                CreatePanelResult(resultados);
+                            }
+                    }
+                    timer.Enabled = true;
                 }
-                timer.Enabled = true;
+                else
+                    timer.Enabled = false;
             }
-            else
-                timer.Enabled = false;
 
         }
         /// <summary>
